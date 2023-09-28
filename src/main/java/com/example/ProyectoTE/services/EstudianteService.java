@@ -13,10 +13,12 @@ public class EstudianteService {
     @Autowired
     private EstudianteRepository estudianteRepository;
 
+
     public ArrayList<EstudianteEntity>obtenerEstudiantes(){
         return (ArrayList<EstudianteEntity>) estudianteRepository.findAll();
     }
-    public void guardarEstudiante(EstudianteEntity estudiante) {
-        estudianteRepository.save(estudiante);
+
+    public EstudianteEntity guardarEstudiante(EstudianteEntity estudiante) {
+        return estudianteRepository.save(estudiante);
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.ArrayList;
@@ -16,15 +17,21 @@ import java.util.ArrayList;
 public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
-    @GetMapping("/listar")
-    public String listar(Model model){
-        ArrayList<EstudianteEntity>estudiante=estudianteService.obtenerEstudiantes();
-        model.addAttribute("estudiante",estudiante);
-        return "index";
+    @GetMapping({"/listar","/"})
+    public String listar(@NotNull Model model){
+        model.addAttribute("estudiante",estudianteService.obtenerEstudiantes());
+        return "index"; // nos retorna a los estudiantes
     }
-    @PostMapping("/listar/guardarEstudiante")
-    public String guardarEstudiante(EstudianteEntity estudiante) {
+    @GetMapping("/listar/crearEstudiante")
+    public String mostrarFormularioDeRegistros(@NotNull Model modelo) {
         // Guardar el estudiante en la base de datos
+        EstudianteEntity estudiante = new EstudianteEntity();
+        modelo.addAttribute("estudiante",estudiante);
+        return "registroEstudiante";
+    }
+
+    @PostMapping("/listar")
+    public String guardarEstudiante(@ModelAttribute("estudiante") EstudianteEntity estudiante){
         estudianteService.guardarEstudiante(estudiante);
         return "redirect:/listar";
     }

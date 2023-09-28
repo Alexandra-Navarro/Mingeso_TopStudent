@@ -17,7 +17,7 @@ public class ProyectoTeApplication implements CommandLineRunner{
 	 private EstudianteRepository estudianteRepository;
 	@Override
 	public void run(String... args) throws Exception {
-		EstudianteEntity estudiante1 = new EstudianteEntity(1,"20.553.677-9","Alexandra","Navarro Calderon","30-05-2001","Subvencionado","Colegio Alicante",4);
+		EstudianteEntity estudiante1 = new EstudianteEntity(1,"20.553.677-9","Navarro Calderon","Alexandra","2001-05-30","Subvencionado","Colegio Alicante",4);
 		estudianteRepository.save(estudiante1);
 
 	}
