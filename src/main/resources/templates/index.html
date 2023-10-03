@@ -13,7 +13,7 @@
     </div>
     <nav>
     </nav>
-    <a class="btn" href="/registro"><button>Volver al menú principal</button></a>
+    <a class="btn-success" href="/registro"><button>Volver al menú principal</button></a>
 </header>
 
     <div class="container">
@@ -30,6 +30,8 @@
                     <th>Tipo Colegio</th>
                     <th>Nombre Colegio</th>
                     <th>Años de egreso</th>
+                    <th>Forma de pago</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -41,6 +43,7 @@
                     <td th:text="${estudiante.tipoColegioProcedencia}">Tipo Colegio</td>
                     <td th:text="${estudiante.nombreColegio}">Nombre Colegio</td>
                     <td th:text="${estudiante.anioEgresoColegio}">Años de egreso</td>
+                    <td th:text="${estudiante.formaPago}">Forma de pago</td>
                 </tr>
             </tbody>
         </table>

@@ -25,6 +25,7 @@ public class EstudianteEntity {
     private String tipoColegioProcedencia;
     private String nombreColegio;
     private Integer anioEgresoColegio;
+    private String formaPago;
 
     @OneToMany(mappedBy = "estudiante")
     private List<PagoEntity> pago;

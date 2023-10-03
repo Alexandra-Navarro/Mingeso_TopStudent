@@ -12,7 +12,7 @@
   </div>
   <nav>
   </nav>
-  <a class="btn" href="/registro/listar"><button>Lista Estudiante</button></a>
+  <a class="btn-success" href="/registro/listar"><button>Lista Estudiante</button></a>
 </header>
   <br>
     <div class="row">
@@ -42,6 +42,9 @@
 
                 <label >Año de Egreso del Colegio:</label>
                 <input type="number"  name="anioEgresoColegio" th:field="*{anioEgresoColegio}" required><br><br>
+
+                <label >Forma de Pago:</label>
+                <input type="text"  name="formaPago" th:field="*{formaPago}" required><br><br>
 
                 <button class="btn btn-success">Guardar Estudiante</button>
               </div>
