@@ -17,12 +17,12 @@ import java.util.ArrayList;
 public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
-    @GetMapping({"/listar","/"})
+    @GetMapping({"/registro/listar","/"})
     public String listar(@NotNull Model model){
         model.addAttribute("estudiante",estudianteService.obtenerEstudiantes());
         return "index"; // nos retorna a los estudiantes
     }
-    @GetMapping("/listar/crearEstudiante")
+    @GetMapping("/registro")
     public String mostrarFormularioDeRegistros(@NotNull Model modelo) {
         // Guardar el estudiante en la base de datos
         EstudianteEntity estudiante = new EstudianteEntity();
@@ -30,10 +30,10 @@ public class EstudianteController {
         return "registroEstudiante";
     }
 
-    @PostMapping("/listar")
+    @PostMapping("/registro/listar")
     public String guardarEstudiante(@ModelAttribute("estudiante") EstudianteEntity estudiante){
         estudianteService.guardarEstudiante(estudiante);
-        return "redirect:/listar";
+        return "redirect:/registro/listar";
     }
 }
 

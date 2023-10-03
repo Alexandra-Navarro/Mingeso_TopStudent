@@ -6,5 +6,5 @@ package com.example.ProyectoTE.repositories;
 
 @Repository
 public interface EstudianteRepository extends JpaRepository <EstudianteEntity, Long> {
-
+ EstudianteEntity findByRut(String rut);
 }

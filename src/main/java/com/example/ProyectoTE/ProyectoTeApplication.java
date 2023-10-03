@@ -8,18 +8,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProyectoTeApplication implements CommandLineRunner{
+public class ProyectoTeApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProyectoTeApplication.class, args);
 	}
-	 @Autowired
-	 private EstudianteRepository estudianteRepository;
-	@Override
-	public void run(String... args) throws Exception {
-		EstudianteEntity estudiante1 = new EstudianteEntity(1,"20.553.677-9","Navarro Calderon","Alexandra","2001-05-30","Subvencionado","Colegio Alicante",4);
-		estudianteRepository.save(estudiante1);
 
-	}
+
 
 }
