@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "pago")
@@ -18,11 +20,18 @@ public class PagoEntity {
     @Column(unique = true,nullable = false)
     private int id;
     private String matricula;
-    private String fechaPago;
     private Integer arancelTotal;
+    private Integer cantidadCuotasP;
+    private String fechaPago;
     private String estado;
+    private LocalDate fechaVencimiento;
 
-    @ManyToOne EstudianteEntity estudiante;
+    @ManyToOne
+    private EstudianteEntity estudiante;
 
+    public void setValorCuota(double estudianteCuota) {
+    }
 
+    public void setEstudiante(EstudianteEntity estudiante) {
+    }
 }

@@ -12,7 +12,8 @@
   </div>
   <nav>
   </nav>
-  <a class="btn-success" href="/registro/listar"><button>Lista Estudiante</button></a>
+  <a class="btn btn-info" href="/registro/listar" role="button">Lista Estudiante</a>
+
 </header>
   <br>
     <div class="row">
@@ -40,13 +41,20 @@
                 <label >Nombre del Colegio:</label>
                 <input type="text" name="nombreColegio" th:field="*{nombreColegio}" required><br><br>
 
-                <label >Año de Egreso del Colegio:</label>
+                <label >Años de Egreso del Colegio:</label>
                 <input type="number"  name="anioEgresoColegio" th:field="*{anioEgresoColegio}" required><br><br>
 
                 <label >Forma de Pago:</label>
                 <input type="text"  name="formaPago" th:field="*{formaPago}" required><br><br>
 
-                <button class="btn btn-success">Guardar Estudiante</button>
+                <label >Cantidad Cuotas:</label>
+                <input type="text"  name="cantidadCuotas" th:field="*{cantidadCuotasE}" required><br><br>
+
+
+                <label >Estado Matrícula:</label>
+                <input type="text"  name="estadoMatricula" th:field="*{estadoMatricula}" required><br><br>
+
+                <button class="btn btn-info">Guardar Estudiante</button>
               </div>
             </div>
           </form>

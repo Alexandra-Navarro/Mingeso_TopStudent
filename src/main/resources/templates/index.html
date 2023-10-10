@@ -13,13 +13,26 @@
     </div>
     <nav>
     </nav>
-    <a class="btn-success" href="/registro"><button>Volver al menú principal</button></a>
+    <a class="btn btn-primary" href="/registro" role="button">Volver al menú principal</a>
+    
 </header>
-
+<br>
     <div class="container">
-        <div class ="row">
-            <h1>Lista de estudiantes</h1>
-        </div>
+        <form class="form-inline" th:action="@{/}" style="display: flex; justify-content: space-between;">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <label for="palabraClave" class="col-form-label">Buscar: </label>
+                </div>
+                <div class="col-auto">
+                    <input type="text" name="palabraClave" class="form-control" id="palabraClave" th:value="${palabraClave}" placeholder="Ingrese el rut a buscar">
+                </div>
+                <div class="col-auto">
+                    <input type="submit" class="btn btn-secondary mb-2" value="Buscar">
+                    <input type="submit" class="btn btn-secondary mb-2" value="Limpiar">
+                </div>
+            </div>
+        </form>
+
         <table class="table table-striped table-bordered">
             <thead class="table-dark">
                 <tr>
@@ -31,7 +44,11 @@
                     <th>Nombre Colegio</th>
                     <th>Años de egreso</th>
                     <th>Forma de pago</th>
-
+                    <th>Cantidad Cuotas</th>
+                    <th>Estado Matricula</th>
+                    <th>Ver Cuotas</th>
+                    <th>Accion</th>
+                    <th>Accion</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,6 +61,14 @@
                     <td th:text="${estudiante.nombreColegio}">Nombre Colegio</td>
                     <td th:text="${estudiante.anioEgresoColegio}">Años de egreso</td>
                     <td th:text="${estudiante.formaPago}">Forma de pago</td>
+                    <td th:text="${estudiante.cantidadCuotasE}">Cantidad Cuotas</td>
+                    <td th:text="${estudiante.estadoMatricula}">Estado Matrícula</td>
+
+                    <td>
+                        <a th:href="@{'/registro/listar/cuotas/' + ${estudiante.rut}}" class="btn btn-primary">Ver Cuotas</a>
+                    </td>
+                    <td><a class="btn btn-primary" href="" role="button">Editar</a></td>
+                    <td><a class="btn btn-primary" href="" role="button">Eliminar</a></td>
                 </tr>
             </tbody>
         </table>

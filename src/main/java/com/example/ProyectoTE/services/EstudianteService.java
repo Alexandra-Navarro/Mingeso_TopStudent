@@ -20,4 +20,10 @@ public class EstudianteService {
     public void guardarEstudiante(EstudianteEntity estudiante) {
         estudianteRepository.save(estudiante);
     }
+
+    public EstudianteEntity buscarEstudiantePorRut(String rut) {
+        return estudianteRepository.findByRut(rut);
+    }
+
+
 }

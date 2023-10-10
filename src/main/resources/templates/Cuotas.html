@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Lista Cuotas | TopEducation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+<body>
+
+<header class="header">
+    <div class="logo">
+        <h1>TopEstudent</h1>
+    </div>
+    <nav>
+    </nav>
+    <a class="btn btn-primary" href="/registro/listar" role="button">Volver a la lista</a>
+
+</header>
+<div class="container">
+    <h2>Información de Cuotas del Estudiante</h2>
+    <p>Rut: <span th:text="${estudiante.rut}"></span></p>
+    <p>Nombre: <span th:text="${estudiante.nombre}"></span></p>
+    <p>Apellidos: <span th:text="${estudiante.apellidos}"></span></p>
+
+    <table class="table table-striped table-bordered">
+        <thead class="table-dark">
+        <tr>
+            <th>Número de Cuota</th>
+            <th>Valor de Cuota</th>
+            <th>Estado de Cuota</th>
+            <th>Editar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="cuota, iterStat : ${cuotas}">
+            <td th:text="${iterStat.index + 1}"></td>
+            <td th:text="${cuota}"></td>
+            <td>Pendiente</td>
+            <td><a class="btn btn-info" href="" role="button">Editar</a></td>
+
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+
+<!--<div class="container">-->
+<!--    <div class ="row">-->
+<!--        <h1>Lista de cuotas</h1>-->
+<!--    </div>-->
+<!--    <table class="table table-striped table-bordered">-->
+<!--        <thead class="table-dark">-->
+<!--        <tr>-->
+<!--            <th>Rut</th>-->
+<!--            <th>Nombre</th>-->
+<!--            <th>Apellidos</th>-->
+<!--            <th>Numero de cuotas</th>-->
+<!--            <th>Valor de cuotas</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--            <tr th:each="estudiante : ${estudiantesDTOList}">-->
+<!--                <td th:text="${estudiante.rut}">Rut</td>-->
+<!--                <td th:text="${estudiante.nombre}">Nombre</td>-->
+<!--                <td th:text="${estudiante.apellidos}">Apellido</td>-->
+<!--                <td th:text="${estudiante.cantidadCuotasE}">Num Cuotas</td>-->
+
+<!--                &lt;!&ndash; Iteramos sobre las cuotas del estudiante y las mostramos en columnas &ndash;&gt;-->
+<!--                <td th:each="cuota : ${estudiante.cuotas}" th:text="${cuota}"></td>-->
+<!--            </tr>-->
+
+<!--        </tbody>-->
+
+<!--    </table>-->
+<!--</div>-->

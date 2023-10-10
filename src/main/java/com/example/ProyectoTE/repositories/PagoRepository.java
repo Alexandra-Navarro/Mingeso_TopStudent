@@ -1,7 +1,10 @@
 package com.example.ProyectoTE.repositories;
 
 import com.example.ProyectoTE.entities.EstudianteEntity;
+import com.example.ProyectoTE.entities.PagoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface PagoRepository extends JpaRepository<EstudianteEntity, Long> {
+@Repository
+public interface PagoRepository extends JpaRepository< PagoEntity, Long> {
 }
