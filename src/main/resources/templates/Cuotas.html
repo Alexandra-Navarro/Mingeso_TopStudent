@@ -28,6 +28,10 @@
             <th>Número de Cuota</th>
             <th>Valor de Cuota</th>
             <th>Estado de Cuota</th>
+            <th>Fecha Limite de Pago</th>
+            <th>Fecha de Pago</th>
+            <th>Meses de Atraso</th>
+            <th>Valor Cuota Final</th>
             <th>Editar</th>
         </tr>
         </thead>
@@ -35,10 +39,16 @@
         <tr th:each="cuota, iterStat : ${cuotas}">
             <td th:text="${iterStat.index + 1}"></td>
             <td th:text="${cuota}"></td>
-            <td>Pendiente</td>
-            <td><a class="btn btn-info" href="" role="button">Editar</a></td>
-
+            <td th:text="${estadosCuotas[__${iterStat.index}__]}"></td>
+            <td th:text="${fechasLimite[__${iterStat.index}__]}"></td>
+            <td th:text= ""></td>
+            <td th:text="${mesesAtraso[__${iterStat.index}__]}"></td>
+            <td ></td> <!-- Muestra el valor cuota final -->
+            <td>
+                <a th:href="@{'/registro/listar/cuotas/' + ${estudiante.rut} + '/' + ${iterStat.index + 1}}" class="btn btn-primary"> Comenzar pago</a>
+            </td>
         </tr>
+
         </tbody>
     </table>
 </div>

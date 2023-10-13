@@ -19,8 +19,7 @@ public class EstudianteEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique = true,nullable = false)
-    private int id;
-
+    private Long id;
     private String rut;
     private String apellidos;
     private String nombre;
@@ -32,5 +31,6 @@ public class EstudianteEntity {
     private Integer cantidadCuotasE;
     private String estadoMatricula;
     private List<Double> cuotas;
+    private List<String> estadosCuotas;
 
 }

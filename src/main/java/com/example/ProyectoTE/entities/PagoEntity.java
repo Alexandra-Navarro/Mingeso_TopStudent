@@ -22,16 +22,17 @@ public class PagoEntity {
     private String matricula;
     private Integer arancelTotal;
     private Integer cantidadCuotasP;
-    private String fechaPago;
+    private LocalDate fechaPago;
     private String estado;
-    private LocalDate fechaVencimiento;
+
+    private LocalDate fechaLimitePago;
+    private LocalDate fechaPagoCuota;
+    private Integer mesesAtraso;
+    private String estadoCuota;
 
     @ManyToOne
     private EstudianteEntity estudiante;
 
-    public void setValorCuota(double estudianteCuota) {
-    }
 
-    public void setEstudiante(EstudianteEntity estudiante) {
-    }
+
 }

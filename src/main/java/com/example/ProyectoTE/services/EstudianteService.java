@@ -25,5 +25,12 @@ public class EstudianteService {
         return estudianteRepository.findByRut(rut);
     }
 
+    public EstudianteEntity eliminarEstudiantePorId(Long id){
+        estudianteRepository.deleteById(id);
+        return null;
+    }
+    public EstudianteEntity obtenerEstudiantePorId(Long id){
+        return  estudianteRepository.findById(id).get();
+    }
 
 }

@@ -67,8 +67,8 @@
                     <td>
                         <a th:href="@{'/registro/listar/cuotas/' + ${estudiante.rut}}" class="btn btn-primary">Ver Cuotas</a>
                     </td>
-                    <td><a class="btn btn-primary" href="" role="button">Editar</a></td>
-                    <td><a class="btn btn-primary" href="" role="button">Eliminar</a></td>
+                    <td><a th:href="@{/registro/listar/editar/{id}(id = ${estudiante.id})}" class="btn btn-warning" href="" role="button">Editar</a></td>
+                    <td><a th:href="@{/registro/listar/{id}(id = ${estudiante.id})}" class="btn btn-danger" href="" role="button">Eliminar</a></td>
                 </tr>
             </tbody>
         </table>
