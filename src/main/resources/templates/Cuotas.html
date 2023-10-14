@@ -41,9 +41,9 @@
             <td th:text="${cuota}"></td>
             <td th:text="${estadosCuotas[__${iterStat.index}__]}"></td>
             <td th:text="${fechasLimite[__${iterStat.index}__]}"></td>
-            <td th:text= ""></td>
+            <td></td>
             <td th:text="${mesesAtraso[__${iterStat.index}__]}"></td>
-            <td ></td> <!-- Muestra el valor cuota final -->
+            <td th:text="${cuotasFinales[__${iterStat.index}__]}"></td>
             <td>
                 <a th:href="@{'/registro/listar/cuotas/' + ${estudiante.rut} + '/' + ${iterStat.index + 1}}" class="btn btn-primary"> Comenzar pago</a>
             </td>

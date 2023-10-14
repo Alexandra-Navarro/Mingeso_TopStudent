@@ -1,6 +1,7 @@
 package com.example.ProyectoTE.controllers;
 
 import com.example.ProyectoTE.entities.EstudianteEntity;
+import com.example.ProyectoTE.entities.PagoEntity;
 import com.example.ProyectoTE.repositories.EstudianteRepository;
 import com.example.ProyectoTE.repositories.PagoRepository;
 import com.example.ProyectoTE.services.EstudianteService;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @Controller
@@ -34,22 +36,29 @@ public class PagoController {
         EstudianteEntity estudiante = estudianteService.buscarEstudiantePorRut(rut);
 
         if (estudiante != null) {
+            List<PagoEntity> pagos = pagoRepository.findByMatricula(estudiante.getRut());
             double[] cuotas = pagoService.listarCuotas(estudiante);
             String[] fechasLimite = pagoService.calcularFechasLimitePago(estudiante);
             String[] mesesAtraso = pagoService.calcularMesesAtraso(estudiante, fechasLimite);
             String[] estadosCuotas = pagoService.listarEstado(estudiante);
+            double[] cuotasFinales = new double[cuotas.length];
 
+            for (int i = 0; i < cuotas.length; i++) {
+                cuotasFinales[i] = pagoService.calcularCuotaFinal(estudiante, Integer.parseInt(mesesAtraso[i]), cuotas[i]);
+            }
 
             model.addAttribute("estudiante", estudiante);
             model.addAttribute("cuotas", cuotas);
+            model.addAttribute("cuotasFinales", cuotasFinales);
             model.addAttribute("fechasLimite", fechasLimite);
             model.addAttribute("mesesAtraso", mesesAtraso);
             model.addAttribute("estadosCuotas", estadosCuotas);
-
+            model.addAttribute("pagos", pagos);
             return "Cuotas";
         }
         return "redirect:/";  // Reemplaza esto con la página adecuada si el estudiante no se encuentra
     }
+
 
 
 

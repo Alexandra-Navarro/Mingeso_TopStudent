@@ -169,31 +169,24 @@ public class PagoService {
 
 
 
-    //Funcion para calcular los intereses a las cuotas
-    public double calcularIntereses (EstudianteEntity estudiante, PagoEntity pago){
-        double cuota = calcularCuotas(estudiante);
-        if ( pago.getMesesAtraso() == 0){
-            cuota = cuota  + ( cuota * 0);
+    public double calcularCuotaFinal(EstudianteEntity estudiante, int mesesAtraso, double cuota) {
+        double interes = 0;
+
+        if (mesesAtraso == 1) {
+            interes = 0.03;
+        } else if (mesesAtraso == 2) {
+            interes = 0.06;
+        } else if (mesesAtraso == 3) {
+            interes = 0.09;
+        } else if (mesesAtraso > 3) {
+            interes = 0.15;
         }
-        if ( pago.getMesesAtraso() == 1){
-            cuota = cuota  + ( cuota * 0.03);
-        }
-        if ( pago.getMesesAtraso() == 2){
-            cuota = cuota  + ( cuota * 0.06);
-        }
-        if ( pago.getMesesAtraso() == 3){
-            cuota = cuota  + ( cuota * 0.09);
-        }
-        if ( pago.getMesesAtraso() > 3){
-            cuota = cuota  + ( cuota * 0.15);
-        }
-        return cuota;
+
+        return cuota + (cuota * interes);
     }
 
 
-    public List<PagoEntity> obtenerPagosPorEstudiante(EstudianteEntity estudiante) {
-        return pagoRepository.findByEstudiante(estudiante);
-    }
+
 }
 
 
