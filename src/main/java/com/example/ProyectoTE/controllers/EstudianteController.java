@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
+
     @GetMapping({"/registro/listar","/"})
     public String listar(@NotNull Model model){
         model.addAttribute("estudiante",estudianteService.obtenerEstudiantes());

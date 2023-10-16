@@ -119,8 +119,8 @@ public class PagoService {
             // Establecer la fecha límite de pago al día 10 de cada mes
             LocalDate fechaLimite = LocalDate.of(nextYear, nextMonth, 10);
 
-            // Formatear la fecha en un formato legible
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            // Formatear la fecha en el formato "yyyy-MM-dd"
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             fechasLimite[i] = fechaLimite.format(formatter);
 
             // Calcular la fecha para el próximo mes
@@ -133,16 +133,18 @@ public class PagoService {
 
         return fechasLimite;
     }
-    public String[] calcularMesesAtraso(EstudianteEntity estudiante, String[] fechasLimite) {
+
+
+
+    public String[] calcularMesesAtraso(EstudianteEntity estudiante, String[] fechasLimite ) {
         int cantidadCuotas = estudiante.getCantidadCuotasE();
         String[] mesesAtraso = new String[cantidadCuotas];
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         for (int i = 0; i < cantidadCuotas; i++) {
-            // Parsear la fecha límite de pago y la fecha de pago
+
             LocalDate fechaLimite = LocalDate.parse(fechasLimite[i], formatter);
-            LocalDate fechaPago = LocalDate.now(); // Debes obtener la fecha de pago del pago real
+            LocalDate fechaPago = LocalDate.now();
 
             // Calcular la diferencia en meses entre la fecha de pago y la fecha límite
             long meses = ChronoUnit.MONTHS.between(fechaLimite, fechaPago);
@@ -157,15 +159,6 @@ public class PagoService {
         return mesesAtraso;
     }
 
-    @Transactional
-    public void guardarFechaPago(EstudianteEntity estudiante, int cuotaNumber, LocalDate fechaPagoCuota) {
-        PagoEntity pago = new PagoEntity();
-        pago.setEstudiante(estudiante);
-        pago.setFechaPagoCuota(fechaPagoCuota);
-        pago.setEstadoCuota("Pagada");
-
-        pagoRepository.save(pago);
-    }
 
 
 
@@ -185,6 +178,10 @@ public class PagoService {
         return cuota + (cuota * interes);
     }
 
+    public List<PagoEntity> obtenerPagosPorMatricula(String matricula) {
+        // Utiliza el repositorio para buscar los pagos por matrícula (RUT)
+        return pagoRepository.findByMatricula(matricula);
+    }
 
 
 }

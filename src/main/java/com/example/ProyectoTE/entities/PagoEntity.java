@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.time.LocalDate;
 
 
@@ -20,11 +19,9 @@ public class PagoEntity {
     @Column(unique = true,nullable = false)
     private int id;
     private String matricula;
-    private Integer arancelTotal;
+    private Double valorCuota;
+    private Double valorCuotaFinal;
     private Integer cantidadCuotasP;
-    private LocalDate fechaPago;
-    private String estado;
-
     private LocalDate fechaLimitePago;
     private LocalDate fechaPagoCuota;
     private Integer mesesAtraso;
@@ -32,7 +29,6 @@ public class PagoEntity {
 
     @ManyToOne
     private EstudianteEntity estudiante;
-
 
 
 }
