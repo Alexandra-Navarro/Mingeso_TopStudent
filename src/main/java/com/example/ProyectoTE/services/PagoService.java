@@ -25,7 +25,7 @@ public class PagoService {
     @Autowired
     private  PagoRepository pagoRepository;
 
-    //Aqui se calculan los descuentos correspondientes a Tipo de colegio del estudiante
+    //Aqui se calculan los descuentos correspondientes a Tipo de colegio del estudiante (PRUEBAS UNITARIAS LISTAS)
     public double calcularDescuento (EstudianteEntity estudiante){
         double arancel= 1500000;
         if (Objects.equals(estudiante.getTipoColegioProcedencia(), "Municipal")){
@@ -40,7 +40,9 @@ public class PagoService {
         return arancel;
     }
 
-    //Se calculan los descuentos según los años de egreso del colegio
+
+
+    //Se calculan los descuentos según los años de egreso del colegio (PRUEBAS UNITARIAS LISTAS)
     public double calcularDescuentoEgreso (EstudianteEntity estudiante){
         double arancel = calcularDescuento(estudiante);
         if (estudiante.getAnioEgresoColegio() < 1){
@@ -58,7 +60,7 @@ public class PagoService {
         return arancel;
     }
 
-    // Se calculan los descuentos para los que agan al contado y se verifican los maximos de cuotas por tipo de colegio
+    // Se calculan los descuentos para los que agan al contado y se verifican los maximos de cuotas por tipo de colegio (PRUEBAS UNITARIAS LISTAS)
     public double calcularCuotas(EstudianteEntity estudiante){
         double arancel = calcularDescuentoEgreso(estudiante);
         if (Objects.equals(estudiante.getFormaPago(), "Contado") && estudiante.getCantidadCuotasE()==1){
@@ -102,9 +104,7 @@ public class PagoService {
         int cantidadCuotas = estudiante.getCantidadCuotasE();
         String[] fechasLimite = new String[cantidadCuotas];
 
-        // Obtener el mes actual
         LocalDate today = LocalDate.now();
-        int currentMonth = today.getMonthValue();
 
         // Ajustar el mes inicial a marzo del año actual
         int nextMonth = 3;
