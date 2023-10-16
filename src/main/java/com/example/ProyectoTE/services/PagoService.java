@@ -23,15 +23,9 @@ import java.util.Optional;
 public class PagoService {
 
     @Autowired
-    private EstudianteRepository estudianteRepository;
-    @Autowired
     private  PagoRepository pagoRepository;
 
-    public Optional<PagoEntity> obtenerCuotasId(long id){
-        return pagoRepository.findById(id);
-    }
-
-
+    //Aqui se calculan los descuentos correspondientes a Tipo de colegio del estudiante
     public double calcularDescuento (EstudianteEntity estudiante){
         double arancel= 1500000;
         if (Objects.equals(estudiante.getTipoColegioProcedencia(), "Municipal")){
@@ -46,6 +40,7 @@ public class PagoService {
         return arancel;
     }
 
+    //Se calculan los descuentos según los años de egreso del colegio
     public double calcularDescuentoEgreso (EstudianteEntity estudiante){
         double arancel = calcularDescuento(estudiante);
         if (estudiante.getAnioEgresoColegio() < 1){
@@ -63,6 +58,7 @@ public class PagoService {
         return arancel;
     }
 
+    // Se calculan los descuentos para los que agan al contado y se verifican los maximos de cuotas por tipo de colegio
     public double calcularCuotas(EstudianteEntity estudiante){
         double arancel = calcularDescuentoEgreso(estudiante);
         if (Objects.equals(estudiante.getFormaPago(), "Contado") && estudiante.getCantidadCuotasE()==1){

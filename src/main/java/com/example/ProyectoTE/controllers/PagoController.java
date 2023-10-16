@@ -30,44 +30,36 @@ public class PagoController {
     @Autowired
     private PagoRepository pagoRepository;
 
-    @Autowired
-    EstudianteRepository estudianteRepository;
-
-// ... (otros métodos en tu controlador)
 
     @GetMapping("/registro/listar/cuotas/{rut}")
     public String verCuotasEstudiante(@PathVariable String rut, Model model) {
         EstudianteEntity estudiante = estudianteService.buscarEstudiantePorRut(rut);
 
         if (estudiante != null) {
+            // Calcula y guarda las cuotas en la tabla de pagos
+            List<PagoEntity> pagos = new ArrayList<>();
+            double[] cuotas = pagoService.listarCuotas(estudiante);
+            String[] fechasLimite = pagoService.calcularFechasLimitePago(estudiante);
+            String[] mesesAtraso = pagoService.calcularMesesAtraso(estudiante, fechasLimite);
+            String[] estadosCuotas = pagoService.listarEstado(estudiante);
+            double[] cuotasFinales = new double[cuotas.length];
 
-                // Calcula y guarda las cuotas en la tabla de pagos
+            for (int i = 0; i < cuotas.length; i++) {
+                cuotasFinales[i] = pagoService.calcularCuotaFinal(estudiante, Integer.parseInt(mesesAtraso[i]), cuotas[i]);
 
-                List<PagoEntity> pagos = new ArrayList<>();
-                double[] cuotas = pagoService.listarCuotas(estudiante);
-                String[] fechasLimite = pagoService.calcularFechasLimitePago(estudiante);
-                String[] mesesAtraso = pagoService.calcularMesesAtraso(estudiante, fechasLimite);
-                String[] estadosCuotas = pagoService.listarEstado(estudiante);
-                double[] cuotasFinales = new double[cuotas.length];
+                PagoEntity pago = new PagoEntity();
+                pago.setMatricula(estudiante.getRut());
+                pago.setFechaLimitePago(LocalDate.parse(fechasLimite[i]));
+                pago.setMesesAtraso(Integer.parseInt(mesesAtraso[i]));
+                pago.setValorCuota(cuotas[i]);
+                pago.setValorCuotaFinal(cuotasFinales[i]);
+                pago.setCantidadCuotasP(i + 1);
+                pago.setEstadoCuota(estadosCuotas[i]);
 
-                for (int i = 0; i < cuotas.length; i++) {
-                    cuotasFinales[i] = pagoService.calcularCuotaFinal(estudiante, Integer.parseInt(mesesAtraso[i]), cuotas[i]);
-
-                    PagoEntity pago = new PagoEntity();
-                    pago.setMatricula(estudiante.getRut());
-                    pago.setFechaLimitePago(LocalDate.parse(fechasLimite[i]));
-                    pago.setMesesAtraso(Integer.parseInt(mesesAtraso[i]));
-                    pago.setValorCuota(cuotas[i]);
-                    pago.setValorCuotaFinal(cuotasFinales[i]);
-                    pago.setCantidadCuotasP(i + 1);
-                    pago.setEstadoCuota(estadosCuotas[i]);
-
-                    pagos.add(pago);
-                }
-
-                // Guarda los pagos en la base de datos
+                pagos.add(pago);
+            }
+            // Guarda los pagos en la base de datos
             pagoRepository.saveAll(pagos);
-
 
             model.addAttribute("estudiante", estudiante);
             model.addAttribute("cuotas", cuotas);
@@ -80,6 +72,7 @@ public class PagoController {
         }
         return "redirect:/";  // Reemplaza esto con la página adecuada si el estudiante no se encuentra
     }
+
 
     @PostMapping("/registro/listar/cuotas/{rut}/pagar/{cuotaIndex}")
     public String pagarCuota(@PathVariable String rut, @PathVariable int cuotaIndex) {
@@ -98,7 +91,6 @@ public class PagoController {
 
         return "redirect:/registro/listar/cuotas/" + rut;
     }
-
 
 }
 

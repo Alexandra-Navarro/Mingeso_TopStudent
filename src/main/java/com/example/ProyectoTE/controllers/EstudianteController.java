@@ -14,11 +14,14 @@ public class EstudianteController {
     @Autowired
     private EstudianteService estudianteService;
 
+    //Listar estudiantes de la base de datos
     @GetMapping({"/registro/listar","/"})
     public String listar(@NotNull Model model){
         model.addAttribute("estudiante",estudianteService.obtenerEstudiantes());
         return "index"; // nos retorna a los estudiantes
     }
+
+    //Formulario de registro de los alumnos
     @GetMapping("/registro")
     public String mostrarFormularioDeRegistros(@NotNull Model modelo) {
         // Guardar el estudiante en la base de datos
@@ -27,12 +30,14 @@ public class EstudianteController {
         return "registroEstudiante";
     }
 
+    //Se guardan los estudiantes que se ingresan a la base de datos
     @PostMapping("/registro/listar")
     public String guardarEstudiante(@ModelAttribute("estudiante") EstudianteEntity estudiante){
         estudianteService.guardarEstudiante(estudiante);
         return "redirect:/registro/listar";
     }
 
+    //Opción para eliminar un estudiante
     @GetMapping("/registro/listar/{id}")
     public String eliminarEstudiante(@PathVariable Long id) {
         estudianteService.eliminarEstudiantePorId(id);

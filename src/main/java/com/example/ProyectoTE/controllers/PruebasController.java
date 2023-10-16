@@ -23,13 +23,14 @@ public class PruebasController {
     @Autowired
     private PruebasService pruebasService;
 
+    //Se obtienen las pruebas de la base de datos para listarlas
     @GetMapping("/ingresarPrueba/listarPrueba")
     public String listar(@NotNull Model model){
         model.addAttribute("prueba",pruebasService.obtenerPrueba());
         return "listaPruebas"; // nos retorna a los estudiantes
     }
 
-    // Endpoint para mostrar el formulario de ingreso de puntajes de pruebas
+    //Muestra el formulario de ingreso de puntajes de pruebas
     @GetMapping("/ingresarPrueba")
     public String mostrarFormularioIngresoPruebas(@NotNull Model modelo) {
         PruebasEntity prueba = new PruebasEntity();
@@ -37,7 +38,7 @@ public class PruebasController {
         return "formularioIngresoPruebas";
     }
 
-    // Endpoint para procesar el envío del formulario de ingreso de puntajes de pruebas
+    // Se guardan las pruebas ingresadas en la base de datos
     @PostMapping("/ingresarPrueba/listarPrueba")
     public String procesarFormularioIngresoPruebas(@ModelAttribute("pruebasEntity") PruebasEntity pruebasEntity) {
         pruebasService.guardarPruebas(pruebasEntity);
@@ -45,12 +46,7 @@ public class PruebasController {
 
     }
 
-    @GetMapping("/seleccionarFechaExcel")
-    public String mostrarFormularioSeleccionFecha() {
-        return "ExcelPorFechas";
-    }
-
-
+    //Con esto se genera el archivo de excel para las fechas que se van ingresando por pantalla (administrador)
     @GetMapping("/exportarExcel/{fecha}")
     public void exportPruebasToExcelByFecha(HttpServletResponse response, @PathVariable String fecha) throws IOException {
         response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
@@ -84,39 +80,3 @@ public class PruebasController {
     }
 
 }
-
-
-
-// Otros endpoints y métodos según tus necesidades
-
-//    @GetMapping("/exportarExcel")
-//    public void exportPruebasToExcel(HttpServletResponse response) throws IOException {
-//        response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
-//        response.setHeader("Content-Disposition", "attachment; filename=pruebas.xlsx");
-//
-//        List<PruebasEntity> pruebas = pruebasService.obtenerPrueba();
-//
-//        try (XSSFWorkbook workbook = new XSSFWorkbook()) {
-//            XSSFSheet sheet = workbook.createSheet("Pruebas");
-//
-//            // Crear encabezados
-//            String[] headers = {"RUT Estudiante", "Asignatura", "Fecha de Examen", "Puntaje Obtenido"};
-//            XSSFRow headerRow = sheet.createRow(0);
-//            for (int i = 0; i < headers.length; i++) {
-//                XSSFCell cell = headerRow.createCell(i);
-//                cell.setCellValue(headers[i]);
-//            }
-//
-//            // Llenar datos de pruebas
-//            int rowNum = 1;
-//            for (PruebasEntity prueba : pruebas) {
-//                XSSFRow row = sheet.createRow(rowNum++);
-//                row.createCell(0).setCellValue(prueba.getRutEstudiante());
-//                row.createCell(1).setCellValue(prueba.getAsignaturaExamen());
-//                row.createCell(2).setCellValue(prueba.getFechaExamen().toString());
-//                row.createCell(3).setCellValue(prueba.getPuntajeObtenido());
-//            }
-//
-//            workbook.write(response.getOutputStream());
-//        }
-//    }

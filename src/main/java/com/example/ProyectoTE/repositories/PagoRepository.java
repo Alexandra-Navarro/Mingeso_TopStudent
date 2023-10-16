@@ -12,8 +12,5 @@ import java.util.List;
 
 @Repository
 public interface PagoRepository extends JpaRepository< PagoEntity, Long> {
-
-    List<PagoEntity> findByEstudiante(EstudianteEntity estudiante);
-
     List<PagoEntity> findByMatricula(String rut);
 }
