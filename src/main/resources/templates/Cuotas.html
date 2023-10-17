@@ -5,19 +5,54 @@
     <title> Lista Cuotas | TopEducation</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
+
+<style>
+
+    .navbar {
+        background-color: #000000;
+    }
+
+    .container h2{
+        color: white;
+    }
+
+    .navbar .nav-link {
+        color: white; /* Texto blanco */
+    }
+
+    .navbar .navbar-nav {
+        margin-left: auto;
+    }
+
+</style>
 <body>
-
 <header class="header">
-    <div class="logo">
-        <h1>TopEducation</h1>
-    </div>
-    <nav>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <h2>TopEducation</h2>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/Home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/registro">Volver al registro estudiante</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/registro/listar">Volver a la lista</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-    <a class="btn btn-primary" href="/registro/listar" role="button">Volver a la lista</a>
-
 </header>
+<br>
 <div class="container">
-    <h2>Información de Cuotas del Estudiante</h2>
+    <h3>Información de Cuotas del Estudiante</h3>
     <p>Rut: <span th:text="${estudiante.rut}"></span></p>
     <p>Nombre: <span th:text="${estudiante.nombre}"></span></p>
     <p>Apellidos: <span th:text="${estudiante.apellidos}"></span></p>
